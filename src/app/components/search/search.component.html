@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col">
+    <input
+      type="text"
+      #searchTerm
+      (keyup)="searchArtists(searchTerm.value)"
+      class="form-control"
+      placeholder="Artist Search"
+    />
+  </div>
+</div>
+
+<app-loading *ngIf="loading" class="m-5" ></app-loading>
+<app-artistcard *ngIf="!loading" [items]="artists"></app-artistcard>
+
