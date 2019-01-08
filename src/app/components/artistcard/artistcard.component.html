@@ -1,5 +1,5 @@
 <div class="card-columns">
-    <div class="card" *ngFor="let song of items">
+    <div class="card" *ngFor="let song of items" (click)="getArtist(song)">
       <img [src]="song.images | noimage" class="card-img-top" alt="song.name" />
       <div class="card-body">
         <h5 class="card-title">

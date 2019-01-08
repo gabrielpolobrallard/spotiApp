@@ -1,3 +1,92 @@
-<p>
-  artist works!
-</p>
+<app-loading *ngIf="loading"></app-loading>
+
+<h1 class="text">{{ artist.name }}</h1>
+<hr />
+<div class="row">
+  <div class="col col-6">
+    <img
+      [src]="artist.images | noimage"
+      class="img-circle"
+      width="80%"
+      [alt]="artist.name"
+    />
+  </div>
+  <div class="col" >
+    <div class="row mb-1">
+      <button type="button" class="btn btn-primary">
+        Followers
+        <span class="badge badge-light">{{ artist.followers.total }}</span>
+      </button>
+    </div>
+    <div class="row mb-1">
+      <button type="button" class="btn btn-primary">
+        Popularity
+        <span class="badge badge-success">{{ artist.popularity }}</span>
+      </button>
+    </div>
+    <div class="row">
+      <a href="{{ artist.external_urls.spotify }}"> <img src="assets/Spotify.png" width="30%" alt="Go To Spotify"> Open in Spotify! </a>
+    </div>
+  </div>
+</div>
+
+<hr />
+<h2>Genres</h2>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let genre of artist.genres">
+    {{ genre }}
+  </li>
+</ul>
+<hr />
+<h2>Albums</h2>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let track of albums">
+    <div class="row">
+      <div class="col col-3">
+        <img [src]="track.album.images | noimage" width="80%" alt="" />
+      </div>
+      <div class="col">
+        <span class="">Tracks : {{ track.album.total_tracks }}</span><br>
+        <span class="">Song : {{ track.name }}</span> <br />
+        <span class="">Album : {{ track.album.name }}</span> <br />
+        <span class="">Release Type :{{ track.album.type }}</span><br>
+        <span class="">Duration : {{ track.duration_ms | number }} ms.</span><br>
+        <span class="">Release Date : {{ track.album.release_date }}</span><br>
+        <audio [src]="track.preview_url" controls></audio>
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+
+<div class="row m-5">
+  <div class="col">
+    <div class="table">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Album</th>
+          <th>Song</th>
+          <th>Preview</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr *ngFor="let track of albums" >
+            <td> <img
+              [src]="track.album.images | noimage"
+              class="img-circle"
+              width="80%"
+              [alt]="artist.name"
+            /></td>
+            <td>{{track.album.name}}</td>
+            <td>{{ track.name }}</td>
+            <td>
+              <audio [src]="track.preview_url" controls></audio>
+              <!-- <iframe [src]="https://open.spotify.com/embed/album/ | safedom : {{track.uri}}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
+            </td>
+          </tr>
+        </tbody>
+    </div>
+  </div>
+</div>
